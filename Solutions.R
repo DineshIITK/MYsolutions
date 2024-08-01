@@ -42,5 +42,17 @@ SeatNo = function(roll)
 }
 SeatNo(230374)
 
+#Question5
+
+No.of.BS = 0
+
+for(i in 1:dim(seat[1])){
+  if(seat$Roll.No[i] < 999999)
+  {
+    No.of.BS = No.of.BS + 1
+  }
+}
+paste("No of BS students" , No.of.BS)
+paste("No.of.MSc students" , (dim(seat[1])-No.of.BS))
 
 
