@@ -79,3 +79,42 @@ x = runif(n = 1e5)
 benchmark(
   norm(x,"2") , sqrt(sum(x^2)) , replications = 20
 )
+
+
+
+#Question 6 
+n <- 10^4
+uniform_draws_loop <- numeric(n)
+
+system.time({
+  for (i in 1:n) {
+    uniform_draws_loop[i] <- runif(1, min = 0, max = 1)
+  }
+})
+
+system.time({
+  uniform_draws_all <- runif(n, min = 0, max = 1)
+})
+
+
+
+
+
+#Question 7
+
+
+
+
+num1 <- numeric(length = 1e3)
+num2 <- numeric(length = 1e6)
+mat1 <- matrix(runif(100*1000), nrow = 100, ncol = 1000)
+mat2 <- matrix(0, nrow = 100, ncol = 1000)
+arr <- array(0, dim = c(100,100,100))
+
+
+object.size(num1)
+object.size(num2)
+object.size(mat1)
+object.size(mat2)
+object.size(arr)
+
