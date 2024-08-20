@@ -26,7 +26,7 @@ name <- html %>% html_elements(".head3 a") %>% html_text()
 
 PDfels = read_html("https://www.iitk.ac.in/math/visitors-post-doctoral-fellow")
 names = PDfels %>% html_elements(".head2") %>% html_text()
-names
+# names
 
 
 #Question2
@@ -46,9 +46,19 @@ tmeter = nflix %>% html_elements(".tMeterScore") %>% html_text()
 
 year = nflix %>% html_elements(".subtle.start-year") %>% html_text()
 years = as.numeric(substr(year , 2,5))
-years
+# years
 
-directors = nflix %>% html_elements(".info.director a")
-listdir = sapply(directors , function(a) a %>% html_elements("a") %>% html_text())
-listdir
-html
+directors = nflix %>% html_elements(".info.director")
+listdir = sapply(directors , function(a) a %>% html_elements("a") %>% html_text() %>% paste(collapse = ","))
+# listdir
+
+NetFlix_Movies = data.frame("Rank" = ranks , "Name" = names , "Year" = years , "Directed By" = listdir , "Tomatometer"  = tmeter , check.rows = TRUE)
+write.csv(NetFlix_Movies , "NetflixTOP100")
+
+
+#/QUestion3
+
+wta = read_html("https://www.espn.com/tenis/rankings/_/tipo/wta")
+tables <- wta %>% html_table(fill = TRUE)
+table = tables[[1]]
+wta_table <- table[, c("Rank", "Name", "Points", "Age")]
